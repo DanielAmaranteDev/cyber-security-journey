@@ -80,3 +80,8 @@ grep "palavra" arquivo.txt
 
 sort = agrupa
 uniq = remove repetições adjacentes
+
+| Comando          | Resultado                                            |
+| -----------------|----------------------------------------------------- |
+| `sort | uniq`    | Mostra uma ocorrência de cada valor                  |
+| `sort | uniq -u` | Mostra apenas valores que aparecem exatamente uma vez|
