@@ -40,3 +40,33 @@ Basicamente uma empresa (fundação) pega o Linux (Kernel) e adiciona elementos 
 Os sistemas embarcados são uma combinação de hardware e software projetados para cumprir uma função específica dentro de um sistema maior. Normalmente fazem parte de outros dispositivos e ajudam a controlá-los. Podem ser encontrados em aplicações automotivas, médicas e até militares. O android é um sistema operacional móvel desenvolvido principalmente pelo Google. A empresa inicialmente criou um sistema operacional destinado a rodar em câmeras digitais.
 
 ## Diferenças entre Linux Desktop e Linux Server
+
+Modelo Cliente-Servidor
+
+O modelo cliente-servidor é uma estrutura de aplicação que distribui as tarefas e cargas de trabalho entre os fornecedores de um recurso ou serviço, chamados de servidores, e os dispositivos ou programas que solicitam esses serviços, chamados de clientes.
+
+Na prática, isso significa que um servidor disponibiliza recursos, como páginas de sites, arquivos, bancos de dados ou aplicações, enquanto os clientes fazem solicitações para acessar esses recursos. Por exemplo, quando você acessa um site pelo navegador, seu computador atua como cliente, enquanto o computador que hospeda o site atua como servidor, recebendo sua solicitação e enviando a página solicitada.
+
+Linux Desktop
+
+O Linux Desktop é voltado para o uso cotidiano de pessoas que interagem diretamente com o computador. Seu principal objetivo é oferecer um ambiente gráfico, no qual o usuário pode executar tarefas por meio de janelas, ícones, menus e aplicativos, sem precisar utilizar comandos no terminal o tempo todo.
+
+É utilizado para atividades como navegar na internet, estudar, trabalhar com documentos, assistir a vídeos, programar e executar outros programas. Por isso, normalmente possui uma interface gráfica completa, além de aplicativos e recursos que facilitam a experiência do usuário.
+
+Algumas distribuições bastante conhecidas são Ubuntu Desktop, Linux Mint e Fedora Workstation.
+
+Linux Server
+
+O Linux Server é voltado para administrar e disponibilizar serviços a outros computadores ou dispositivos por meio de uma rede. Diferentemente do Desktop, seu foco não é oferecer uma interface visual para o uso cotidiano, mas executar serviços de maneira estável, contínua e eficiente.
+
+Ele pode ser utilizado para hospedar sites, armazenar arquivos, gerenciar bancos de dados, executar aplicações, controlar redes e disponibilizar serviços para diversos usuários ao mesmo tempo.
+
+Por esse motivo, muitas instalações de Linux Server não possuem interface gráfica, sendo administradas principalmente por meio do terminal, geralmente com acesso remoto utilizando o protocolo SSH. Essa configuração reduz o consumo de recursos do computador e permite que eles sejam direcionados à execução dos serviços.
+
+Algumas distribuições utilizadas em servidores são Ubuntu Server, Debian e Red Hat Enterprise Linux.
+
+Principal diferença
+
+A principal diferença entre Linux Desktop e Linux Server está na finalidade de cada um. Enquanto o Linux Desktop é desenvolvido e configurado para facilitar a interação direta de uma pessoa com o computador, o Linux Server é configurado para fornecer serviços e recursos a outros dispositivos, normalmente por meio de uma rede.
+
+É importante entender que eles não são necessariamente sistemas operacionais completamente diferentes. Ambos utilizam o Linux e podem compartilhar muitas das mesmas tecnologias. A diferença está principalmente nos programas instalados, nas configurações e na forma como cada sistema é utilizado. Inclusive, um Linux Desktop pode funcionar como servidor, assim como um Linux Server pode receber uma interface gráfica, caso seja necessário.
