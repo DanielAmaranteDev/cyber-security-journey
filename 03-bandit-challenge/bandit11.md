@@ -63,6 +63,7 @@ Ao executar o comando, o texto foi decodificado e o terminal exibiu:
 ```text
 The password is 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4
 ```
+7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4
 
 Dessa forma, foi possível obter a senha necessária para acessar o próximo nível.
 

@@ -216,3 +216,75 @@ O `echo "finalizado"` aparece mesmo que algum comando tenha falhado no meio do c
 ### echo e touch
 
 O `echo` imprime um texto na tela, e é isso que o script usa para mostrar as mensagens. Combinado com o `>` (como no módulo de Linux Fundamentals), esse texto vai para um arquivo em vez da tela. Já o `touch` cria um arquivo vazio ou, se ele já existir, só atualiza a data de modificação.
+
+## Grupos de usuários
+
+Para testar, crio uma usuária nova (o mesmo comando de antes, com a mesma observação sobre o `-crypt`):
+
+```bash
+useradd maria -m -c "Maria dos Santos" -s /bin/bash -p $(openssl passwd -crypt senha123)
+```
+
+Os grupos que já existem ficam listados em `/etc/group`:
+
+```bash
+cat /etc/group
+```
+
+Entre eles aparecem o `sudo` e o `adm`. Se eu logasse como maria e tentasse usar o `sudo`, daria erro, porque ela não pertence ao grupo `sudo`, que é o que libera esse uso no Ubuntu. O `adm` é outra coisa: dá acesso à leitura dos logs do sistema, mas não libera o `sudo`.
+
+Para adicioná-la aos grupos, o `usermod --help` mostra as opções:
+
+```bash
+usermod -G adm,sudo maria
+```
+
+O `-G` (maiúsculo) define os grupos adicionais do usuário, um ou vários, separados por vírgula e sem espaços. Já o `-g` (minúsculo) troca o grupo **principal** do usuário, que não é o que quero aqui.
+
+Também posso criar e excluir meus próprios grupos:
+
+| Comando | Função |
+|---|---|
+| `groupadd admgroup` | Cria um grupo |
+| `groupdel admgroup` | Exclui um grupo |
+
+Um grupo novo nasce sem privilégio nenhum, e o nome `admgroup` é só um nome. As permissões do grupo vêm dos arquivos e diretórios associados a ele (assunto da próxima seção), e todo usuário adicionado ao grupo passa a ter esse acesso. No caso do `sudo`, o que libera o uso é uma regra do arquivo `/etc/sudoers` para o grupo `sudo`.
+
+Supondo que a maria esteja no `sudo` e no `adm` e eu queira colocá-la também no `admgroup`: se eu rodar `usermod -G admgroup maria`, ela sai dos outros dois e fica só no `admgroup`, porque o `-G` substitui a lista de grupos em vez de acrescentar. Com o `usermod` eu teria que listar todos (`usermod -G sudo,adm,admgroup maria`). Para acrescentar ou remover um grupo sem mexer nos demais, existe um comando específico, o `gpasswd`:
+
+| Comando | Função |
+|---|---|
+| `gpasswd -a maria admgroup` | Adiciona a maria ao `admgroup`; ela continua nos grupos em que já estava |
+| `gpasswd -d maria admgroup` | Remove a maria do `admgroup`; ela continua nos demais |
+
+A mudança de grupos só vale para sessões novas: se o usuário já estiver logado, precisa sair e entrar de novo.
+
+## Conhecendo o sistema de permissões
+
+Ao listar um local com `ls -l`, cada linha traz várias informações. Por exemplo:
+
+```text
+drwxr-xr-x  19 root root 4620 Nov 21 15:14 dev
+```
+
+| Campo | No exemplo | Significado |
+|---|---|---|
+| Tipo e permissões | `drwxr-xr-x` | O primeiro caractere é o tipo; os outros nove são as permissões |
+| Links | `19` | Quantidade de links do item (não é essencial por enquanto) |
+| Dono | `root` | Usuário dono do item |
+| Grupo | `root` | Grupo dono do item |
+| Tamanho | `4620` | Tamanho em bytes (em diretórios, não é o tamanho do conteúdo) |
+| Data | `Nov 21 15:14` | Data e hora da última modificação |
+| Nome | `dev` | Nome do arquivo ou diretório |
+
+O primeiro caractere indica o tipo: `d` é um diretório e `-` é um arquivo comum. Existem outros, como o `l` (link simbólico).
+
+Os nove caracteres seguintes são três blocos de três, sempre na ordem dono, grupo e outros (todos os demais usuários). Dentro de cada bloco as letras vêm na ordem `r`, `w`, `x`, e um `-` no lugar significa que aquela permissão não existe.
+
+| Letra | Em um arquivo | Em um diretório |
+|---|---|---|
+| `r` | Ler o conteúdo | Listar o conteúdo |
+| `w` | Alterar o conteúdo | Criar, renomear e apagar itens dentro dele |
+| `x` | Executar como programa ou script | Entrar nele (`cd`) |
+
+Lendo o exemplo, `rwx r-x r-x` quer dizer que o dono (`root`) pode tudo, e o grupo (`root`) e os demais usuários podem listar e entrar no diretório, mas não alterá-lo. É por isso que o script precisou do `chmod +x`: ele liga o `x` do arquivo.

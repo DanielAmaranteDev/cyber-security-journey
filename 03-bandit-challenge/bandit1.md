@@ -19,7 +19,7 @@ ssh bandit1@bandit.labs.overthewire.org -p 2220
 Após executar o comando, foi solicitada a senha obtida no nível anterior:
 
 ```text
-ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If
+PK8fYLZg2hnHSz83plBL1iEPKdD3QToB
 ```
 
 Depois de acessar o servidor, utilizei o comando `ls` para listar os arquivos presentes no diretório atual. Foi então possível identificar um arquivo chamado `-`.

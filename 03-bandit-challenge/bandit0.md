@@ -29,7 +29,7 @@ cat readme
 para exibir seu conteúdo. Dentro dele estava a senha necessária para acessar o próximo nível:
 
 ```text
-ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If
+6y2kwnwK6grgvwvpvLaa2T1cpFEKOhNR
 ```
 
 ### Comandos aprendidos

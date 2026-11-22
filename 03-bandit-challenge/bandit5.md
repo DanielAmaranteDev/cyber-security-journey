@@ -71,7 +71,7 @@ O comando `cat` exibe o conteúdo de um arquivo diretamente no terminal.
 Ao visualizar o conteúdo do arquivo, encontrei a senha necessária para acessar o próximo nível:
 
 ```text
-HWasnPhtq9AVKe0dmk45nxy20cvUa6EG
+pXa26xhMWaC2SvDotA4r9EgZkulOeSBW
 ```
 
 ### Conceitos aprendidos

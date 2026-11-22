@@ -49,7 +49,7 @@ Porém, os itens `.` e `..` representam diretórios especiais do sistema (`diret
 Dentro do arquivo estava a senha necessária para acessar o próximo nível:
 
 ```text
-2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ
+xzTXq1rDJQVVAzdv5cHq1TQytTWufAMq
 ```
 
 ### Conceitos aprendidos

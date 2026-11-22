@@ -29,7 +29,7 @@ cat "./--spaces in this filename--"
 Após executar o comando, foi possível visualizar o conteúdo do arquivo e obter a senha necessária para acessar o próximo nível:
 
 ```text
-MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
+7ZZ2LFrykP2zEyvBl4m3clcL7tGYJPME
 ```
 
 ### Conceitos aprendidos

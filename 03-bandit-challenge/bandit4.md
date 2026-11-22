@@ -39,7 +39,7 @@ O comando `cat` exibe o conteúdo de um arquivo diretamente no terminal. O prefi
 Ao exibir o conteúdo do arquivo, encontrei a senha necessária para acessar o próximo nível:
 
 ```text
-4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw
+6C7h9GD8M6ai5nr7wo1RonrzFjj9yIrG
 ```
 
 ### Conceitos aprendidos
