@@ -1,6 +1,6 @@
 # Manipulando Arquivos no Linux
 
-Anotações do curso sobre navegação pelo sistema de arquivos, uso do root, gerenciamento de usuários e criação de usuários em lote com script.
+Anotações do curso sobre navegação pelo sistema de arquivos, uso do root, gerenciamento de usuários, criação de usuários em lote com script, grupos e permissões.
 
 ## Navegando pelo sistema de arquivos
 
@@ -215,7 +215,7 @@ O `echo "finalizado"` aparece mesmo que algum comando tenha falhado no meio do c
 
 ### echo e touch
 
-O `echo` imprime um texto na tela, e é isso que o script usa para mostrar as mensagens. Combinado com o `>` (como no módulo de Linux Fundamentals), esse texto vai para um arquivo em vez da tela. Já o `touch` cria um arquivo vazio ou, se ele já existir, só atualiza a data de modificação.
+O `echo` imprime um texto na tela, e é isso que o script usa para mostrar as mensagens. Combinado com o `>` (como no módulo de Linux Fundamentals do tryhackme), esse texto vai para um arquivo em vez da tela. Já o `touch` cria um arquivo vazio ou, se ele já existir, só atualiza a data de modificação.
 
 ## Grupos de usuários
 
@@ -248,7 +248,7 @@ Também posso criar e excluir meus próprios grupos:
 | `groupadd admgroup` | Cria um grupo |
 | `groupdel admgroup` | Exclui um grupo |
 
-Um grupo novo nasce sem privilégio nenhum, e o nome `admgroup` é só um nome. As permissões do grupo vêm dos arquivos e diretórios associados a ele (assunto da próxima seção), e todo usuário adicionado ao grupo passa a ter esse acesso. No caso do `sudo`, o que libera o uso é uma regra do arquivo `/etc/sudoers` para o grupo `sudo`.
+Um grupo novo nasce sem privilégio nenhum, e o nome `admgroup` é só um nome. As permissões do grupo vêm dos arquivos e diretórios associados a ele (assunto das próximas seções), e todo usuário adicionado ao grupo passa a ter esse acesso. No caso do `sudo`, o que libera o uso é uma regra do arquivo `/etc/sudoers` para o grupo `sudo`.
 
 Supondo que a maria esteja no `sudo` e no `adm` e eu queira colocá-la também no `admgroup`: se eu rodar `usermod -G admgroup maria`, ela sai dos outros dois e fica só no `admgroup`, porque o `-G` substitui a lista de grupos em vez de acrescentar. Com o `usermod` eu teria que listar todos (`usermod -G sudo,adm,admgroup maria`). Para acrescentar ou remover um grupo sem mexer nos demais, existe um comando específico, o `gpasswd`:
 
@@ -288,3 +288,40 @@ Os nove caracteres seguintes são três blocos de três, sempre na ordem dono, g
 | `x` | Executar como programa ou script | Entrar nele (`cd`) |
 
 Lendo o exemplo, `rwx r-x r-x` quer dizer que o dono (`root`) pode tudo, e o grupo (`root`) e os demais usuários podem listar e entrar no diretório, mas não alterá-lo. É por isso que o script precisou do `chmod +x`: ele liga o `x` do arquivo.
+
+Uma tabela de permissões em imagem está em `04-santander-ciberseguranca-do-zero-a-pratica/tabela-permissoes.jpeg`.
+
+### Trocando o dono e o grupo
+
+O `chown` (*change owner*) troca o usuário e o grupo donos de um arquivo ou diretório, no formato `usuario:grupo`:
+
+```bash
+chown debora:admgroup /adm/
+```
+
+Agora o diretório `/adm` tem a `debora` como dona e pertence ao grupo `admgroup`. O comando precisa ser executado como root (ou com `sudo`), e o usuário e o grupo já precisam existir.
+
+### Alterando as permissões
+
+Para mudar as permissões, o `chmod` usa números: cada permissão vale um valor, e a soma dos valores forma o número de cada bloco (dono, grupo e outros).
+
+| Permissão | Valor |
+|---|---|
+| Ler (*read*) | 4 |
+| Gravar (*write*) | 2 |
+| Executar (*execute*) | 1 |
+| Nenhuma (*none*) | 0 |
+
+Por exemplo, supondo que o diretório `/adm` já exista:
+
+```bash
+chmod 750 /adm/
+```
+
+| Número | Conta | Resultado | Vale para |
+|---|---|---|---|
+| 7 | 4 + 2 + 1 | `rwx` | Dono |
+| 5 | 4 + 1 | `r-x` | Grupo |
+| 0 | 0 | `---` | Outros |
+
+O resultado é `rwxr-x---`: o dono pode tudo, o grupo pode listar e entrar no diretório (sem alterá-lo) e os outros usuários não têm acesso nenhum.
